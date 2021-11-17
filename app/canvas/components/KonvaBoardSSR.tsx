@@ -1,3 +1,4 @@
+import { logDOM } from "@testing-library/dom"
 import React, { useRef, useState } from "react"
 import { render } from "react-dom"
 import { Stage, Layer, Line, Text } from "react-konva"
@@ -32,6 +33,8 @@ const KonvaBoard = () => {
   const handleMouseUp = () => {
     isDrawing.current = false
   }
+
+  console.log(lines)
 
   return (
     <div>

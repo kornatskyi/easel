@@ -5,6 +5,7 @@ import KonvaBoard from "../components/KonvaBoard"
 function CanvasPage(props) {
   return (
     <div>
+      <h1>Canvas page</h1>
       <KonvaBoard />
     </div>
   )
