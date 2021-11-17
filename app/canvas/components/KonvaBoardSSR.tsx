@@ -1,7 +1,6 @@
-import { logDOM } from "@testing-library/dom"
 import React, { useRef, useState } from "react"
-import { render } from "react-dom"
 import { Stage, Layer, Line, Text } from "react-konva"
+import styles from "../styles/konva-board.module.scss"
 
 const KonvaBoard = () => {
   const [tool, setTool] = useState<any>("pen")
@@ -34,16 +33,15 @@ const KonvaBoard = () => {
     isDrawing.current = false
   }
 
-  console.log(lines)
-
   return (
-    <div>
+    <div className={styles.container}>
       <Stage
         width={window.innerWidth}
-        height={window.innerHeight}
+        height={window.innerWidth}
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
         onMouseup={handleMouseUp}
+        className={styles.board}
       >
         <Layer>
           <Text text="Just start drawing" x={5} y={30} />
