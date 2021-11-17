@@ -1,11 +1,15 @@
-import { BlitzPage } from "blitz"
+import React from "react"
+import PropTypes from "prop-types"
+import KonvaBoard from "../components/KonvaBoard"
 
-const CanvasPage: BlitzPage = () => {
+function CanvasPage(props) {
   return (
     <div>
-      <h1>Hello canvas page</h1>
+      <KonvaBoard />
     </div>
   )
 }
+
+CanvasPage.propTypes = {}
 
 export default CanvasPage
