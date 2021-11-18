@@ -45,9 +45,9 @@ const ToolsPanel = (props) => {
 const KonvaBoard = () => {
   const [tool, setTool] = useState<string>("pen")
   const [lines, setLines] = useState<LinePops[]>([])
-  const isDrawing = useRef(false)
   const [strokeWidth, setSrokeWidth] = useState<number>(5)
   const [stroke, setStroke] = useState<string>("#df4b26")
+  const isDrawing = useRef(false)
 
   const handleMouseDown = (e) => {
     isDrawing.current = true
