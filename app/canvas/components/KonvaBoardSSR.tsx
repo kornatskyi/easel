@@ -16,10 +16,10 @@ const ToolsPanel = (props) => {
   const { setTool, setStrokeWidth, setStroke } = props
   return (
     <div>
-      <button value={"pen"} onClick={(e) => setTool(e.target.value)}>
+      <button value={"pen"} onClick={(e) => setTool((e.target as HTMLInputElement).value)}>
         Pen
       </button>
-      <button value={"eraser"} onClick={(e) => setTool(e.target.value)}>
+      <button value={"eraser"} onClick={(e) => setTool((e.target as HTMLInputElement).value)}>
         Eraser
       </button>
       <input
@@ -81,7 +81,7 @@ const KonvaBoard = () => {
   return (
     <div className={styles.container}>
       <Stage
-        width={BOARD_WIDTH}
+        width={window.innerWidth}
         height={BOARD_HEIGHT}
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
