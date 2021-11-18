@@ -74,6 +74,7 @@ const KonvaBoard = () => {
         </Layer>
       </Stage>
       <ToolsPanel
+        stroke={stroke}
         strokeWidth={strokeWidth}
         setTool={setTool}
         setStrokeWidth={setSrokeWidth}
