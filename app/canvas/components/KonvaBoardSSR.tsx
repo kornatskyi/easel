@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Stage, Layer, Line, Text } from "react-konva"
 import styles from "../styles/konva-board.module.scss"
+import ToolsPanel from "./ToolsPanel"
 
 const BOARD_WIDTH = 500
 const BOARD_HEIGHT = 400
@@ -12,38 +13,8 @@ interface LinePops {
   strokeWidth: number
 }
 
-const ToolsPanel = (props) => {
-  const { setTool, setStrokeWidth, setStroke } = props
-  return (
-    <div>
-      <button value={"pen"} onClick={(e) => setTool((e.target as HTMLInputElement).value)}>
-        Pen
-      </button>
-      <button value={"eraser"} onClick={(e) => setTool((e.target as HTMLInputElement).value)}>
-        Eraser
-      </button>
-      <input
-        type="text"
-        name="strokeSize"
-        placeholder="size"
-        onChange={(e) => {
-          setStrokeWidth(parseInt(e.target.value))
-        }}
-      />
-      <input
-        type="text"
-        name="stroke"
-        placeholder="stroke"
-        onChange={(e) => {
-          setStroke(e.target.value)
-        }}
-      />
-    </div>
-  )
-}
-
 const KonvaBoard = () => {
-  const [tool, setTool] = useState<string>("pen")
+  const [tool, setTool] = useState<string>("pencil")
   const [lines, setLines] = useState<LinePops[]>([])
   const isDrawing = useRef(false)
   const [strokeWidth, setSrokeWidth] = useState<number>(5)
@@ -89,7 +60,6 @@ const KonvaBoard = () => {
         className={styles.board}
       >
         <Layer>
-          <Text text="Just start drawing" x={5} y={30} />
           {lines.map((line, i) => (
             <Line
               key={i}
@@ -103,17 +73,12 @@ const KonvaBoard = () => {
           ))}
         </Layer>
       </Stage>
-      <ToolsPanel setTool={setTool} setStrokeWidth={setSrokeWidth} setStroke={setStroke} />
-
-      <select
-        value={tool}
-        onChange={(e) => {
-          setTool(e.target.value)
-        }}
-      >
-        <option value="pen">Pen</option>
-        <option value="eraser">Eraser</option>
-      </select>
+      <ToolsPanel
+        strokeWidth={strokeWidth}
+        setTool={setTool}
+        setStrokeWidth={setSrokeWidth}
+        setStroke={setStroke}
+      />
     </div>
   )
 }
