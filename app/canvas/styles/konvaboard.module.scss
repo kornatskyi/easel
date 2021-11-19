@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  background: linear-gradient(117.03deg, #8994cb 33.11%, rgba(132, 146, 221, 0) 100.71%);
+  border-radius: 15px;
+  overflow: hidden;
+
+  .boardContainer {
+    padding: 20px;
+
+    .board {
+      width: min-content;
+      height: min-content;
+      background-color: white;
+      box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+
+      canvas {
+        border-radius: 15px;
+      }
+    }
+  }
+}

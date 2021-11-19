@@ -1,8 +1,9 @@
 .container {
-  border: 1px gray solid;
   display: flex;
-  padding: 5px;
+  padding: 5px 10px;
   justify-content: space-between;
+  width: 100%;
+  background-color: #716edb;
 
   .buttons {
     width: 50%;
@@ -10,7 +11,6 @@
 
     .tool {
       cursor: pointer;
-      border: 1px gray solid;
       border-radius: 5px;
       width: auto;
       height: 100%;
@@ -19,6 +19,17 @@
       align-items: center;
       width: 30px;
       height: 30px;
+      margin-right: 5px;
+
+      svg {
+        color: white;
+      }
+
+      &:hover {
+        svg {
+          color: #3f51aa;
+        }
+      }
     }
   }
 
