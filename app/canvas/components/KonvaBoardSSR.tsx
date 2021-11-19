@@ -1,10 +1,10 @@
 import { useRef, useState } from "react"
 import { Stage, Layer, Line, Rect } from "react-konva"
-import styles from "../styles/konva-board.module.scss"
+import styles from "../styles/konvaboard.module.scss"
 import ToolsPanel from "./ToolsPanel"
 
-const BOARD_WIDTH = 500
-const BOARD_HEIGHT = 400
+const BOARD_WIDTH = 16 * 50
+const BOARD_HEIGHT = 9 * 50
 
 /** Not the best implementation of Undo and Redo mechanisms. But it's ok for now **/
 // History stack, keeps undo lines
@@ -76,28 +76,32 @@ const KonvaBoard = () => {
 
   return (
     <div className={styles.container}>
-      <Stage
-        width={window.innerWidth}
-        height={BOARD_HEIGHT}
-        onMouseDown={handleMouseDown}
-        onMousemove={handleMouseMove}
-        onMouseup={handleMouseUp}
-        className={styles.board}
-      >
-        <Layer>
-          {lines.map((line, i) => (
-            <Line
-              key={i}
-              points={line?.points}
-              stroke={line?.stroke}
-              strokeWidth={line?.strokeWidth}
-              tension={0.5}
-              lineCap="round"
-              globalCompositeOperation={line?.tool === "eraser" ? "destination-out" : "source-over"}
-            />
-          ))}
-        </Layer>
-      </Stage>
+      <div className={styles.boardContainer}>
+        <Stage
+          width={BOARD_WIDTH}
+          height={BOARD_HEIGHT}
+          onMouseDown={handleMouseDown}
+          onMousemove={handleMouseMove}
+          onMouseup={handleMouseUp}
+          className={styles.board}
+        >
+          <Layer>
+            {lines.map((line, i) => (
+              <Line
+                key={i}
+                points={line?.points}
+                stroke={line?.stroke}
+                strokeWidth={line?.strokeWidth}
+                tension={0.5}
+                lineCap="round"
+                globalCompositeOperation={
+                  line?.tool === "eraser" ? "destination-out" : "source-over"
+                }
+              />
+            ))}
+          </Layer>
+        </Stage>
+      </div>
       <ToolsPanel
         stroke={stroke}
         strokeWidth={strokeWidth}

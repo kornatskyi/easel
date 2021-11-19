@@ -1,10 +1,11 @@
 import React from "react"
+import styles from "../styles/range.module.scss"
 
 const Range = (props) => {
   const { setStrokeWidth, value } = props
   return (
-    <div>
-      {value}
+    <div className={styles.rangeContainer}>
+      <span> {value}</span>
       <input
         defaultValue={value}
         min="1"
