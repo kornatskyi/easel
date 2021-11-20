@@ -23,7 +23,7 @@ model User {
 
   tokens   Token[]
   sessions Session[]
-  Post     Post[]
+  posts    Post[]
 }
 
 model Session {
@@ -59,14 +59,14 @@ model Token {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  tags      String?
-  image     String
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tags       String?
+  image      String
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+  authorName String?
 }
 
 // NOTE: It's highly recommended to use an enum for the token type
