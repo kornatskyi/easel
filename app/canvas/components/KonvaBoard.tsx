@@ -10,6 +10,6 @@ const NoSSRKonvaBoard = dynamic(() => import("./KonvaBoardSSR"), {
 })
 
 const KonvaBoard = (props) => {
-  return <NoSSRKonvaBoard />
+  return <NoSSRKonvaBoard {...props} />
 }
 export default KonvaBoard

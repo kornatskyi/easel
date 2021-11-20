@@ -1,4 +1,5 @@
-import { useRef, useState } from "react"
+import { Image } from "blitz"
+import { useEffect, useRef, useState } from "react"
 import { Stage, Layer, Line, Rect } from "react-konva"
 import styles from "../styles/konvaboard.module.scss"
 import ToolsPanel from "./ToolsPanel"
@@ -19,12 +20,36 @@ interface MyLine {
   strokeWidth: number
 }
 
-const KonvaBoard = () => {
+const KonvaBoard = (props) => {
+  const { publishButton, setExportedImage } = props
+
+  const [imageBase64, setImageBase64] = useState("data:image/png;base64,")
   const [tool, setTool] = useState<string>("pencil")
   const [lines, setLines] = useState<(MyLine | undefined)[]>([])
   const isDrawing = useRef(false)
   const [strokeWidth, setSrokeWidth] = useState<number>(5)
   const [stroke, setStroke] = useState<string>("#df4b26")
+
+  const stageRef = useRef(null)
+
+  // Image export handling
+  useEffect(() => {
+    // Set listener on a publish button when component is loaded or button value changed
+    // Publish button comes from parent component
+    const handleExport = () => {
+      if (stageRef.current) {
+        const stage = stageRef.current as HTMLCanvasElement
+        const uri = stage.toDataURL()
+        setImageBase64(uri)
+        setExportedImage(<Image src={uri} alt="hello image" width="100px" height="100px" />)
+      }
+    }
+    if (publishButton) {
+      publishButton.current.onclick = () => {
+        handleExport()
+      }
+    }
+  }, [publishButton, setExportedImage])
 
   // Handle undo button, moves undo lines into the history stack
   const handleUndo = () => {
@@ -84,6 +109,7 @@ const KonvaBoard = () => {
           onMousemove={handleMouseMove}
           onMouseup={handleMouseUp}
           className={styles.board}
+          ref={stageRef}
         >
           <Layer>
             {lines.map((line, i) => (
