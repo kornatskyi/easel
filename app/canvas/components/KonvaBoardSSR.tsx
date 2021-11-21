@@ -1,6 +1,5 @@
-import { Image } from "blitz"
 import { useEffect, useRef, useState } from "react"
-import { Stage, Layer, Line, Rect } from "react-konva"
+import { Stage, Layer, Line } from "react-konva"
 import styles from "../styles/konvaboard.module.scss"
 import ToolsPanel from "./ToolsPanel"
 
@@ -23,11 +22,10 @@ interface MyLine {
 const KonvaBoard = (props) => {
   const { publishButton, setExportedImage } = props
 
-  const [imageBase64, setImageBase64] = useState("data:image/png;base64,")
   const [tool, setTool] = useState<string>("pencil")
   const [lines, setLines] = useState<(MyLine | undefined)[]>([])
   const isDrawing = useRef(false)
-  const [strokeWidth, setSrokeWidth] = useState<number>(5)
+  const [strokeWidth, setStrokeWidth] = useState<number>(5)
   const [stroke, setStroke] = useState<string>("#df4b26")
 
   const stageRef = useRef(null)
@@ -40,8 +38,7 @@ const KonvaBoard = (props) => {
       if (stageRef.current) {
         const stage = stageRef.current as HTMLCanvasElement
         const uri = stage.toDataURL()
-        setImageBase64(uri)
-        setExportedImage(<Image src={uri} alt="hello image" width="100px" height="100px" />)
+        setExportedImage(uri)
       }
     }
     if (publishButton) {
@@ -132,7 +129,7 @@ const KonvaBoard = (props) => {
         stroke={stroke}
         strokeWidth={strokeWidth}
         setTool={setTool}
-        setStrokeWidth={setSrokeWidth}
+        setStrokeWidth={setStrokeWidth}
         setStroke={setStroke}
         undo={handleUndo}
         redo={handleRedo}
