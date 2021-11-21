@@ -12,6 +12,8 @@ import LoginForm from "app/auth/components/LoginForm"
 //  Global styling
 import "../core/styles/index.css"
 
+import "app/core/styles/index.scss"
+
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
 
