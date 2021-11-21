@@ -8,6 +8,7 @@ interface PostData {
   authorName: string | null
   createdAt: Date | null
 }
+
 const defaultPostData: PostData = {
   tags: "palceholder tags",
   image:
