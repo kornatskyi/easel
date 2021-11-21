@@ -4,6 +4,8 @@ import styles from "../../canvas/styles/canvaspage.module.scss"
 import { Image, Routes, useMutation, useRouter } from "blitz"
 import { FORM_ERROR } from "final-form"
 import createPost from "app/posts/mutations/createPost"
+import Form from "app/core/components/Form"
+import LabeledTextField from "app/core/components/LabeledTextField"
 
 type PostValues = {
   tags: string
@@ -15,7 +17,6 @@ function CanvasPage(props) {
   const [createPostMutation] = useMutation(createPost)
 
   const [exportedImage, setExportedImage] = useState<string>("")
-  const [tags, setTags] = useState<string>("")
   const publishButton = useRef(null)
 
   const handlePublish = async (values: PostValues) => {
@@ -33,16 +34,19 @@ function CanvasPage(props) {
   return (
     <div className={styles.canvasPage}>
       <h1>Canvas page</h1>
-      <KonvaBoard publishButton={publishButton} setExportedImage={setExportedImage} />
-      <button
-        ref={publishButton}
-        className={styles.publishButton}
-        onClick={() => {
-          handlePublish({ tags: tags, image: exportedImage })
+      <Form
+        {...props}
+        onSubmit={(values) => {
+          handlePublish({ tags: values.tags, image: exportedImage })
         }}
       >
-        Publish
-      </button>
+        <LabeledTextField name="tags" label="Tags" placeholder="tags" />
+
+        <KonvaBoard publishButton={publishButton} setExportedImage={setExportedImage} />
+        <button ref={publishButton} className={styles.publishButton}>
+          Publish
+        </button>
+      </Form>
     </div>
   )
 }
