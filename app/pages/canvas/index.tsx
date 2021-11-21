@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react"
-import PropTypes from "prop-types"
-import KonvaBoard from "../components/KonvaBoard"
-import styles from "../styles/canvaspage.module.scss"
+import KonvaBoard from "app/canvas/components/KonvaBoard"
+import styles from "../../canvas/styles/canvaspage.module.scss"
 import { Image } from "blitz"
 
 function CanvasPage(props) {
