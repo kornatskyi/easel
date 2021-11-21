@@ -22,7 +22,7 @@ function CanvasPage(props) {
   const handlePublish = async (values: PostValues) => {
     try {
       const post = await createPostMutation(values)
-      router.push(Routes.ShowPostPage({ postId: post.id }))
+      router.push(Routes.PostsPage())
     } catch (error: any) {
       console.error(error)
       return {
@@ -54,6 +54,3 @@ function CanvasPage(props) {
 CanvasPage.propTypes = {}
 
 export default CanvasPage
-function createPostMutation(values: any) {
-  throw new Error("Function not implemented.")
-}

@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from "react"
-import { HexColorPicker, HexColorInput } from "react-colorful"
+import React, { useCallback, useState } from "react"
+import { HexColorPicker } from "react-colorful"
 import useClickOutside from "../utils/useClickOutside"
 import styles from "../styles/colorpicker.module.scss"
 
