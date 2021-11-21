@@ -23,7 +23,6 @@ interface MyLine {
 const KonvaBoard = (props) => {
   const { publishButton, setExportedImage } = props
 
-  const [imageBase64, setImageBase64] = useState("data:image/png;base64,")
   const [tool, setTool] = useState<string>("pencil")
   const [lines, setLines] = useState<(MyLine | undefined)[]>([])
   const isDrawing = useRef(false)
@@ -40,8 +39,7 @@ const KonvaBoard = (props) => {
       if (stageRef.current) {
         const stage = stageRef.current as HTMLCanvasElement
         const uri = stage.toDataURL()
-        setImageBase64(uri)
-        setExportedImage(<Image src={uri} alt="hello image" width="100px" height="100px" />)
+        setExportedImage(uri)
       }
     }
     if (publishButton) {
