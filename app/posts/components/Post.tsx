@@ -21,12 +21,27 @@ function Post(props: { post: PostData }) {
   console.log(createdAt)
 
   return (
-    <div className={styles.postContainer}>
-      <div className={styles.postImage}>
-        <span>{authorName}</span>
-        {tags?.split(" ").map((tag) => `#${tag}`)}
-        <img src={image!} alt="post image" />
-        {/* <span>{createdAt}</span> */}
+    // <div className={styles.postContainer}>
+    //   <div className={styles.postImage}>
+    //     <span>{authorName}</span>
+    //     {tags?.split(" ").map((tag) => `#${tag}`)}
+    //     <img src={image!} alt="post image" />
+    //     {/* <span>{createdAt}</span> */}
+    //   </div>
+    // </div>
+    <div className="py-5">
+      <div className="card">
+        <header className="card-heaer">
+          <p className="card-header-title">{authorName}</p>
+        </header>
+        <div className="card-image">
+          <figure className="image is-16by9">
+            <img src={image!} alt="post image" />
+          </figure>
+        </div>
+        <div className="card-content">
+          <div className="content">{tags?.split(" ").map((tag) => ` #${tag}`)}</div>
+        </div>
       </div>
     </div>
   )

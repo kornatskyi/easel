@@ -41,16 +41,18 @@ const PostsPage: BlitzPage = () => {
         <title>Posts</title>
       </Head>
 
-      <div>
-        <p>
-          <Link href={Routes.NewPostPage()}>
-            <a>Create Post</a>
-          </Link>
-        </p>
+      <div className="columns is-mobile is-centered">
+        <div className="column is-four-fifths-mobile is-four-fifths-tablet is-three-fifths-desktop">
+          <div className="py-5">
+            <Link href={Routes.NewPostPage()}>
+              <button className="button is-link is-outlined is-fullwidth">Create Post</button>
+            </Link>
+          </div>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <PostsList />
-        </Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <PostsList />
+          </Suspense>
+        </div>
       </div>
     </>
   )
