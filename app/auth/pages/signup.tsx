@@ -6,7 +6,7 @@ const SignupPage: BlitzPage = () => {
   const router = useRouter()
 
   return (
-    <div>
+    <div className="columns is-centered">
       <SignupForm onSuccess={() => router.push(Routes.Home())} />
     </div>
   )
