@@ -1,10 +1,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: min-content;
+
+  width: auto;
+
   background: linear-gradient(117.03deg, #8994cb 33.11%, rgba(132, 146, 221, 0) 100.71%);
   border-radius: 15px;
   overflow: hidden;
+  align-items: center;
 
   .boardContainer {
     padding: 20px;
