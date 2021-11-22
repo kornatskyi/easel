@@ -16,9 +16,9 @@ export default resolver.pipe(
     // get user email from session
     const user = await db.user.findUnique({
       where: { id: authorId },
-      select: { email: true },
+      select: { name: true },
     })
-    const authorName = user?.email
+    const authorName = user?.name
 
     const post = await db.post.create({ data: { ...input, authorId, authorName } })
 
