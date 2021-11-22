@@ -31,7 +31,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps}>
+        <label {...labelProps} className="column">
           {label}
           <input
             className="input is-primary "

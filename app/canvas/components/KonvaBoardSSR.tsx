@@ -28,8 +28,25 @@ const KonvaBoard = (props) => {
   const [strokeWidth, setStrokeWidth] = useState<number>(5)
   const [stroke, setStroke] = useState<string>("#df4b26")
 
-  const stageRef = useRef(null)
+  /** Responsive canvas */
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [canvasWidth, setCanvasWidth] = useState<number>(BOARD_WIDTH)
+  // height should be 1 / (16/9) * width to keep the aspect ratio
+  // function that calculates the height of the canvas
+  const getCanvasHeight = (width: number) => {
+    return (width / 16) * 9
+  }
+  const [canvasHeight, setCanvasHeight] = useState<number>(getCanvasHeight(BOARD_WIDTH))
+  // use effect when containerRed.current.clientWidth changes
+  useEffect(() => {
+    if (containerRef.current) {
+      setCanvasWidth(containerRef.current.clientWidth - 40)
+      setCanvasHeight(getCanvasHeight(containerRef.current.clientWidth))
+    }
+  }, [containerRef.current?.clientWidth])
+  /** End of responsive canvas */
 
+  const stageRef = useRef(null)
   // Image export handling
   useEffect(() => {
     // Set listener on a publish button when component is loaded or button value changed
@@ -97,11 +114,11 @@ const KonvaBoard = (props) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div ref={containerRef} className={styles.container}>
       <div className={styles.boardContainer}>
         <Stage
-          width={BOARD_WIDTH}
-          height={BOARD_HEIGHT}
+          width={canvasWidth}
+          height={canvasHeight}
           onMouseDown={handleMouseDown}
           onMousemove={handleMouseMove}
           onMouseup={handleMouseUp}
