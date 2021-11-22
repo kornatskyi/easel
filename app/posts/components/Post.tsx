@@ -43,6 +43,9 @@ function Post(props: { post: PostData }) {
         <div className="card-content">
           <div className="content">{tags?.split(" ").map((tag) => ` #${tag}`)}</div>
         </div>
+        <div className="card-footer">
+          <p className="card-footer-item">{createdAt?.toDateString()}</p>
+        </div>
       </div>
     </div>
   )

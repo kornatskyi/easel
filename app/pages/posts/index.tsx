@@ -45,7 +45,7 @@ const PostsPage: BlitzPage = () => {
         <div className="column is-four-fifths-mobile is-four-fifths-tablet is-three-fifths-desktop">
           <div className="py-5">
             <Link href={Routes.NewPostPage()}>
-              <button className="button is-link is-outlined is-fullwidth">Create Post</button>
+              <button className="button is-link is-outlined is-centered">Create Post</button>
             </Link>
           </div>
 
