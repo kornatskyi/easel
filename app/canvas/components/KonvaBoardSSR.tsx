@@ -3,9 +3,6 @@ import { Stage, Layer, Line } from "react-konva"
 import styles from "../styles/konvaboard.module.scss"
 import ToolsPanel from "./ToolsPanel"
 
-const BOARD_WIDTH = 16 * 50
-const BOARD_HEIGHT = 9 * 50
-
 /** Not the best implementation of Undo and Redo mechanisms. But it's ok for now **/
 // History stack, keeps undo lines
 let history: MyLine[] = []
@@ -30,23 +27,30 @@ const KonvaBoard = (props) => {
 
   /** Responsive canvas */
   const containerRef = useRef<HTMLDivElement>(null)
-  const [canvasWidth, setCanvasWidth] = useState<number>(BOARD_WIDTH)
+  const [canvasWidth, setCanvasWidth] = useState<number>(0)
   // height should be 1 / (16/9) * width to keep the aspect ratio
   // function that calculates the height of the canvas
   const getCanvasHeight = (width: number) => {
     return (width / 16) * 9
   }
-  const [canvasHeight, setCanvasHeight] = useState<number>(getCanvasHeight(BOARD_WIDTH))
+  const [canvasHeight, setCanvasHeight] = useState<number>(getCanvasHeight(0))
   // use effect when containerRed.current.clientWidth changes
   useEffect(() => {
     if (containerRef.current) {
       setCanvasWidth(containerRef.current.clientWidth - 40)
       setCanvasHeight(getCanvasHeight(containerRef.current.clientWidth))
     }
-  }, [containerRef.current?.clientWidth])
+    window.addEventListener("resize", () => {
+      if (containerRef.current) {
+        setCanvasWidth(containerRef.current.clientWidth - 40)
+        setCanvasHeight(getCanvasHeight(containerRef.current.clientWidth))
+      }
+    })
+  }, [])
   /** End of responsive canvas */
 
   const stageRef = useRef(null)
+
   // Image export handling
   useEffect(() => {
     // Set listener on a publish button when component is loaded or button value changed
