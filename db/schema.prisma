@@ -62,7 +62,8 @@ model Post {
   id         Int      @id @default(autoincrement())
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  tags       String
+  tags       String?
+  title      String
   image      String
   author     User?    @relation(fields: [authorId], references: [id])
   authorId   Int?
