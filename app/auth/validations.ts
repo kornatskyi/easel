@@ -32,3 +32,8 @@ export const ChangePassword = z.object({
   currentPassword: z.string(),
   newPassword: password,
 })
+
+// Title validation
+export const Title = z.object({
+  title: z.string().min(3).max(100),
+})
