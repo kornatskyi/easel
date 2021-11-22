@@ -2,6 +2,7 @@ import { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import { z } from "zod"
 import { validateZodSchema } from "blitz"
+import { Button } from "react-bulma-components"
 export { FORM_ERROR } from "final-form"
 
 export interface FormProps<S extends z.ZodType<any, any>>
@@ -12,6 +13,7 @@ export interface FormProps<S extends z.ZodType<any, any>>
   submitText?: string
   schema?: S
   onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
+
   initialValues?: FinalFormProps<z.infer<S>>["initialValues"]
 }
 
@@ -25,6 +27,7 @@ export function Form<S extends z.ZodType<any, any>>({
 }: FormProps<S>) {
   return (
     <FinalForm
+      className="card"
       initialValues={initialValues}
       validate={validateZodSchema(schema)}
       onSubmit={onSubmit}
@@ -40,9 +43,9 @@ export function Form<S extends z.ZodType<any, any>>({
           )}
 
           {submitText && (
-            <button type="submit" disabled={submitting}>
+            <Button type="submit" disabled={submitting} color="primary">
               {submitText}
-            </button>
+            </Button>
           )}
 
           <style global jsx>{`

@@ -33,7 +33,13 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       <div {...outerProps}>
         <label {...labelProps}>
           {label}
-          <input {...input} disabled={submitting} {...props} ref={ref} />
+          <input
+            className="input is-primary "
+            {...input}
+            disabled={submitting}
+            {...props}
+            ref={ref}
+          />
         </label>
 
         {touched && normalizedError && (
