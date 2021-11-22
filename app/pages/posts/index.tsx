@@ -71,7 +71,7 @@ const PostsPage: BlitzPage = () => {
       </Head>
 
       <div className="columns is-mobile is-centered">
-        <div className="column is-four-fifths-mobile is-four-fifths-tablet is-three-fifths-desktop">
+        <div className="column is-four-fifths-mobile is-four-fifths-tablet is-two-fifths-desktop">
           <FilterDropdown setSortingType={setSortingType} />
           <div className="py-5">
             <Link href={Routes.CanvasPage()}>
