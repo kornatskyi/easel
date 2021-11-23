@@ -2,7 +2,8 @@ import { Suspense } from "react"
 import { Navbar } from "react-bulma-components"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
-import { Link, Routes, useMutation } from "blitz"
+import { Link, Routes, useMutation, Image } from "blitz"
+import easelLogo from "../../../public/Easel-simple-logo.png"
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
@@ -59,8 +60,9 @@ export function Nav() {
   return (
     <Navbar fixed="top">
       <Navbar.Brand>
-        <Navbar.Item>
-          <h1 className="is-size-4">Easel</h1>
+        <Navbar.Item href="/">
+          <Image src={easelLogo} alt="Easel Logo" />
+          <h1 className="px-2 is-size-4">Easel</h1>
         </Navbar.Item>
         <Navbar.Burger id="burger" onClick={toggleDropdown} />
       </Navbar.Brand>
