@@ -21,6 +21,7 @@ function CanvasPage(props) {
 
   const [exportedImage, setExportedImage] = useState<string>("")
   const publishButton = useRef(null)
+  const saveButton = useRef(null)
 
   const handlePublish = async (values: PostValues) => {
     try {
@@ -48,7 +49,11 @@ function CanvasPage(props) {
             })
           }}
         >
-          <KonvaBoard publishButton={publishButton} setExportedImage={setExportedImage} />
+          <KonvaBoard
+            publishButton={publishButton}
+            saveButton={saveButton}
+            setExportedImage={setExportedImage}
+          />
           <div className="columns">
             <LabeledTextField label="Tags" name="tags" placeholder="Tags" />
             <LabeledTextField label="Title" name="title" placeholder="Title" />
@@ -56,6 +61,14 @@ function CanvasPage(props) {
           <button ref={publishButton} className="button is-primary">
             Publish
           </button>
+          <a
+            download="FILENAME.png"
+            href={exportedImage}
+            ref={saveButton}
+            className="button is-primary"
+          >
+            Save Image
+          </a>
         </Form>
       </div>
     </div>

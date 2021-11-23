@@ -1,3 +1,4 @@
+import saveImage from "app/api/saveImage"
 import { useEffect, useRef, useState } from "react"
 import { Stage, Layer, Line } from "react-konva"
 import styles from "../styles/konvaboard.module.scss"
@@ -17,7 +18,7 @@ interface MyLine {
 }
 
 const KonvaBoard = (props) => {
-  const { publishButton, setExportedImage } = props
+  const { publishButton, setExportedImage, saveButton } = props
 
   const [tool, setTool] = useState<string>("pencil")
   const [lines, setLines] = useState<(MyLine | undefined)[]>([])
@@ -60,6 +61,35 @@ const KonvaBoard = (props) => {
         const stage = stageRef.current as HTMLCanvasElement
         const uri = stage.toDataURL()
         setExportedImage(uri)
+
+        // save image fetching
+        fetch("/api/saveImage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            image: uri,
+            imageName: "test",
+          }),
+        })
+          .then((res) => {
+            if (res.status === 200) {
+              console.log("Image saved")
+            } else {
+              console.log("Image not saved")
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    }
+    const handleSave = () => {
+      if (stageRef.current) {
+        const stage = stageRef.current as HTMLCanvasElement
+        const uri = stage.toDataURL()
+        setExportedImage(uri)
       }
     }
     if (publishButton) {
@@ -67,7 +97,12 @@ const KonvaBoard = (props) => {
         handleExport()
       }
     }
-  }, [publishButton, setExportedImage])
+    if (saveButton) {
+      saveButton.current.onclick = () => {
+        handleSave()
+      }
+    }
+  }, [publishButton, saveButton, setExportedImage])
 
   // Handle undo button, moves undo lines into the history stack
   const handleUndo = () => {
