@@ -60,10 +60,18 @@ export function Nav() {
   return (
     <Navbar fixed="top">
       <Navbar.Brand>
-        <Navbar.Item href="/">
-          <Image src={easelLogo} alt="Easel Logo" />
-          <h1 className="px-2 is-size-4">Easel</h1>
-        </Navbar.Item>
+        <Link href={Routes.Home()}>
+          <a className="navbar-item is-size-4">
+            <Image src={easelLogo} alt="Easel Logo" />
+            <strong className="px-2">Easel</strong>
+          </a>
+        </Link>
+        <Link href={Routes.CanvasPage()}>
+          <a className="navbar-item is-size-5"> Canvas</a>
+        </Link>
+        <Link href={Routes.PostsPage()}>
+          <a className="navbar-item is-size-5"> Posts</a>
+        </Link>
         <Navbar.Burger id="burger" onClick={toggleDropdown} />
       </Navbar.Brand>
       <Navbar.Menu id="my-nav">

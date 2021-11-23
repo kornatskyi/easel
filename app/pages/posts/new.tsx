@@ -21,7 +21,7 @@ const NewPostPage: BlitzPage = () => {
         onSubmit={async (values) => {
           try {
             const post = await createPostMutation(values)
-            router.push(Routes.ShowPostPage({ postId: post.id }))
+            router.push(Routes.ShowPostPage({ postId: post!.id }))
           } catch (error: any) {
             console.error(error)
             return {

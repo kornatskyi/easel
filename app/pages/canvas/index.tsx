@@ -6,10 +6,13 @@ import { FORM_ERROR } from "final-form"
 import createPost from "app/posts/mutations/createPost"
 import Form from "app/core/components/Form"
 import LabeledTextField from "app/core/components/LabeledTextField"
+import Layout from "app/core/layouts/Layout"
+import { Title } from "app/auth/validations"
 
 type PostValues = {
   tags: string
   image: string
+  title: string
 }
 
 function CanvasPage(props) {
@@ -34,19 +37,15 @@ function CanvasPage(props) {
   return (
     <div className="columns is-centered mgt-medium ">
       <div className="column is-three-quarters content is-centered">
-        <div className="columns is-centered mt-4 is-justify-content-space-between px-6  is-flex	">
-          <Link href={Routes.Home()}>
-            <a className="is-align-self-center is-size-4">Home</a>
-          </Link>
-          <b className="has-text-primary is-size-1 is-align-self-center	">Canvas</b>
-          <Link href={Routes.PostsPage()}>
-            <a className="is-align-self-center		is-size-4">Posts</a>
-          </Link>
-        </div>
         <Form
           {...props}
+          schema={Title}
           onSubmit={(values) => {
-            handlePublish({ tags: values.tags, image: exportedImage })
+            handlePublish({
+              tags: values.tags || "",
+              image: exportedImage,
+              title: values.title,
+            })
           }}
         >
           <KonvaBoard publishButton={publishButton} setExportedImage={setExportedImage} />
@@ -63,6 +62,6 @@ function CanvasPage(props) {
   )
 }
 
-CanvasPage.propTypes = {}
+CanvasPage.getLayout = (page) => <Layout title="Canvas">{page}</Layout>
 
 export default CanvasPage
