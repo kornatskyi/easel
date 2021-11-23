@@ -76,11 +76,9 @@ export function Nav() {
       </Navbar.Brand>
       <Navbar.Menu id="my-nav">
         <Navbar.Container align="right">
-          <Navbar.Item>
-            <Suspense fallback="Loading...">
-              <UserInfo />
-            </Suspense>
-          </Navbar.Item>
+          <Suspense fallback="Loading...">
+            <UserInfo />
+          </Suspense>
         </Navbar.Container>
       </Navbar.Menu>
     </Navbar>
