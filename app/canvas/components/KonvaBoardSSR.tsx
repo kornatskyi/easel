@@ -1,4 +1,3 @@
-import saveImage from "app/api/saveImage"
 import { useEffect, useRef, useState } from "react"
 import { Stage, Layer, Line } from "react-konva"
 import styles from "../styles/konvaboard.module.scss"
@@ -61,28 +60,6 @@ const KonvaBoard = (props) => {
         const stage = stageRef.current as HTMLCanvasElement
         const uri = stage.toDataURL()
         setExportedImage(uri)
-
-        // save image fetching
-        fetch("/api/saveImage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            image: uri,
-            imageName: "test",
-          }),
-        })
-          .then((res) => {
-            if (res.status === 200) {
-              console.log("Image saved")
-            } else {
-              console.log("Image not saved")
-            }
-          })
-          .catch((err) => {
-            console.log(err)
-          })
       }
     }
     const handleSave = () => {

@@ -67,7 +67,7 @@ model Post {
   updatedAt  DateTime @updatedAt
   tags       String?
   title      String
-  image      String
+  image      String   @db.LongText
   author     User?    @relation(fields: [authorId], references: [id])
   authorId   Int?
   authorName String
