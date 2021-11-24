@@ -49,7 +49,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #706edb;
+  background-color: #5271ff;
 }
 
 footer a {
@@ -78,7 +78,7 @@ footer a {
 }
 .button {
   font-size: 1rem;
-  background-color: #706edb;
+  background-color: #5271ff;
   padding: 1rem 2rem;
   color: #f4f4f4;
   text-align: center;
@@ -89,19 +89,19 @@ footer a {
 }
 
 .button:hover {
-  background-color: #706edb;
+  background-color: #5271ff;
 }
 
 .button-outline {
-  border: 2px solid #706edb;
+  border: 2px solid #5271ff;
   padding: 1rem 2rem;
-  color: #706edb;
+  color: #5271ff;
   text-align: center;
 }
 
 .button-outline:hover {
-  border-color: #706edb;
-  color: #706edb;
+  border-color: #5271ff;
+  color: #5271ff;
 }
 
 pre {
