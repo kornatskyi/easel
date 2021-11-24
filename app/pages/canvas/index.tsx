@@ -37,7 +37,7 @@ function CanvasPage(props) {
 
   return (
     <div className="columns is-centered mgt-medium p-5 ">
-      <div className="column is-three-quarters content is-centered">
+      <div className="column is-three-fifths-widescreen is-four-fifths-desktop is-four-fifths-tablet content is-centered">
         <Form
           {...props}
           schema={Title}
@@ -54,21 +54,30 @@ function CanvasPage(props) {
             saveButton={saveButton}
             setExportedImage={setExportedImage}
           />
-          <div className="columns">
-            <LabeledTextField label="Tags" name="tags" placeholder="Tags" />
-            <LabeledTextField label="Title" name="title" placeholder="Title" />
+          <div className="columns is-align-items-end is-justify-content-space-between">
+            <div className="is-flex is-align-items-end is-justify-content-space-between column">
+              <div className="mr-2 ">
+                <LabeledTextField label="Tags" name="tags" placeholder="Tags" />
+              </div>
+              <div className="ml-2 ">
+                <LabeledTextField label="Title" name="title" placeholder="Title" />
+              </div>
+            </div>
+            <div className="is-flex is-align-items-end is-justify-content-space-between column">
+              <a
+                download="FILENAME.png"
+                href={exportedImage}
+                ref={saveButton}
+                className="button is-primary is-fullwidth "
+              >
+                Save
+              </a>
+
+              <button ref={publishButton} className="button is-primary  is-fullwidth ml-4">
+                Publish
+              </button>
+            </div>
           </div>
-          <button ref={publishButton} className="button is-primary">
-            Publish
-          </button>
-          <a
-            download="FILENAME.png"
-            href={exportedImage}
-            ref={saveButton}
-            className="button is-primary"
-          >
-            Save Image
-          </a>
         </Form>
       </div>
     </div>
