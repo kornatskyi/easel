@@ -36,7 +36,7 @@ function CanvasPage(props) {
   }
 
   return (
-    <div className="columns is-centered mgt-medium ">
+    <div className="columns is-centered mgt-medium p-5 ">
       <div className="column is-three-quarters content is-centered">
         <Form
           {...props}

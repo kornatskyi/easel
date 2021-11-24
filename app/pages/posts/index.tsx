@@ -72,11 +72,11 @@ const PostsPage: BlitzPage = () => {
 
       <div className="columns is-mobile is-centered">
         <div className="column is-four-fifths-mobile is-four-fifths-tablet is-two-fifths-desktop">
-          <FilterDropdown setSortingType={setSortingType} />
-          <div className="py-5">
+          <div className="py-1 is-flex is-justify-content-space-between">
             <Link href={Routes.CanvasPage()}>
-              <button className="button is-link is-outlined is-centered">Create Post</button>
+              <button className="button is-link is-outlined">Create Post</button>
             </Link>
+            <FilterDropdown setSortingType={setSortingType} />
           </div>
 
           <Suspense fallback={<div>Loading...</div>}>
@@ -88,7 +88,6 @@ const PostsPage: BlitzPage = () => {
   )
 }
 
-PostsPage.authenticate = true
 PostsPage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default PostsPage
