@@ -42,12 +42,9 @@ export function forgotPasswordMailer({ to, token }: ResetPasswordMailer) {
 
   return {
     async send() {
-      if (process.env.NODE_ENV === "production") {
-      } else {
-        await transporter.sendMail(msg)
-        // Preview email in the browser
-        // await previewEmail(msg)
-      }
+      await transporter.sendMail(msg)
+      // Preview email in the browser
+      // await previewEmail(msg)
     },
   }
 }
