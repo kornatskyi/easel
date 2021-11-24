@@ -9,7 +9,7 @@ const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword)
 
   return (
-    <div>
+    <div className="is-flex is-flex-direction-column is-centered p-3 is-align-items-center">
       <h1>Forgot your password?</h1>
 
       {isSuccess ? (

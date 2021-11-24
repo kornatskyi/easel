@@ -12,7 +12,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
 
   return (
-    <div className="column card is-8-mobile is-4-tablet is-3-desktop">
+    <div className="column card is-8-mobile is-4-tablet is-3-desktop  ">
       <h1>Login</h1>
       <Form
         submitText="Login"
