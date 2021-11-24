@@ -5,6 +5,7 @@
  * and use it straight away.
  */
 import previewEmail from "preview-email"
+import nodemailer from "nodemailer"
 
 type ResetPasswordMailer = {
   to: string
@@ -15,6 +16,15 @@ export function forgotPasswordMailer({ to, token }: ResetPasswordMailer) {
   // In production, set APP_ORIGIN to your production server origin
   const origin = process.env.APP_ORIGIN || process.env.BLITZ_DEV_SERVER_ORIGIN
   const resetUrl = `${origin}/reset-password?token=${token}`
+
+  let transporter = nodemailer.createTransport({
+    service: "Gmail",
+
+    auth: {
+      user: process.env.GMAIL_EMAIL, // generated ethereal user
+      pass: process.env.GMAIL_PASSWORD, // generated ethereal password
+    },
+  })
 
   const msg = {
     from: "TODO@example.com",
@@ -33,12 +43,10 @@ export function forgotPasswordMailer({ to, token }: ResetPasswordMailer) {
   return {
     async send() {
       if (process.env.NODE_ENV === "production") {
-        // TODO - send the production email, like this:
-        // await postmark.sendEmail(msg)
-        throw new Error("No production email implementation in mailers/forgotPasswordMailer")
       } else {
+        await transporter.sendMail(msg)
         // Preview email in the browser
-        await previewEmail(msg)
+        // await previewEmail(msg)
       }
     },
   }
