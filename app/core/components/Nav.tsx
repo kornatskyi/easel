@@ -12,7 +12,7 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <>
-        <div className="py-2 px-2">
+        <div className="py-2 px-2 is-flex is-align-items-center">
           <h2>{currentUser.name}</h2>
         </div>
         <div className="py-2 px-2">
