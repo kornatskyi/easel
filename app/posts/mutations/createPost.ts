@@ -1,5 +1,5 @@
 import { resolver } from "blitz"
-import db, { Post, User } from "db"
+import db from "db"
 import { z } from "zod"
 import { Ctx } from "blitz"
 
@@ -58,6 +58,10 @@ export default resolver.pipe(
           select: { name: true },
         })
         const authorName = user!.name
+
+        if (image === "") {
+          throw new Error("Image is required. Provided empty string")
+        }
 
         const post = await db.post.create({ data: { tags, image, title, authorId, authorName } })
 
