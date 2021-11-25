@@ -34,13 +34,18 @@ function Post(props: { post: PostData }) {
 
   const handleLike = async (e) => {
     e.preventDefault()
-    const post = await likePostMutation({
-      id: id,
-      like: like,
-    })
-    //setting updated number of likes
-    setNumberOfLikes(post.countedNumberOfLikes)
-    setLike(post.didILikeIt)
+
+    try {
+      const post = await likePostMutation({
+        id: id,
+        like: like,
+      })
+      //setting updated number of likes
+      setNumberOfLikes(post.countedNumberOfLikes)
+      setLike(post.didILikeIt)
+    } catch (error) {
+      alert(error)
+    }
   }
 
   return (
