@@ -1,6 +1,6 @@
 [![Easel](/public/easel-readme-logo.png)](https://easel-kornatskyi.vercel.app)
 
-# **Easel** is a drawing app built for creators.
+## **Easel** is a drawing app built for creators.
 
 Easel was made for a week-long [Mintbean](https://tinyurl.com/yz4p8344) hackathon.
 
