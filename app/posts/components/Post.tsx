@@ -1,6 +1,8 @@
-import { Image } from "blitz"
+import { Image, Link, Routes } from "blitz"
+import { Router } from "next/dist/client/router"
 import React from "react"
 import styles from "../styles/Post.module.scss"
+import { FaFileDownload, FaHeart } from "react-icons/fa"
 
 interface PostData {
   tags: string | null
@@ -8,6 +10,7 @@ interface PostData {
   image: string | null
   authorName: string | null
   createdAt: Date | null
+  id: number | string
 }
 
 const defaultPostData: PostData = {
@@ -17,11 +20,11 @@ const defaultPostData: PostData = {
     "https://image.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg",
   authorName: "Author Name Placeholder",
   createdAt: new Date(),
+  id: 1,
 }
 
 function Post(props: { post: PostData }) {
-  const { tags, image, authorName, createdAt, title }: PostData = props.post || defaultPostData
-  console.log(createdAt)
+  const { tags, image, authorName, createdAt, title, id }: PostData = props.post || defaultPostData
 
   return (
     <div className="py-5">
@@ -39,27 +42,46 @@ function Post(props: { post: PostData }) {
               />
             </figure>
             <div className="media-left"></div>
-            <div className="media-content">
-              <p className="title is-5">{authorName}</p>
-              {tags?.split(" ").map((tag, i) => (
-                <a key={i}>#{tag}</a>
-              ))}
+            <div className="media-content is-flex is-flex-direction-column">
+              <span className="">{authorName}</span>
+              <span>
+                {tags?.split(" ").map((tag, i) => (
+                  <a key={i}>#{tag}</a>
+                ))}
+              </span>
+              <span>{createdAt?.toDateString()}</span>
             </div>
           </div>
         </header>
-        <div className="column">
-          <span className="is-size-5 ">
-            <strong>{title}</strong>
-          </span>
-          <div className="card-image">
-            <figure className="image is-16by9 is-align-self-end">
-              <Image draggable="false" src={image!} alt="post image" layout="fill" />
-            </figure>
-          </div>
-        </div>
 
-        <div className="card-footer">
-          <p className="card-footer-item">{createdAt?.toDateString()}</p>
+        <Link href={Routes.ShowPostPage({ postId: id })}>
+          <a>
+            <div className="column">
+              <div className="card-image">
+                <figure className="image is-16by9 is-align-self-end">
+                  <Image draggable="false" src={image!} alt="post image" layout="fill" />
+                </figure>
+              </div>
+            </div>
+          </a>
+        </Link>
+        <div className="card-footer is-flex ">
+          <div className="is-flex is-align-items-center card-footer-item">
+            <a href={image!} className=" is-primary ">
+              <FaHeart />
+              <span className="mx-1">10</span>
+            </a>
+          </div>
+
+          <span className="card-footer-item  is-size-5 has-text-primary has-text-weight-semibold ">
+            {title}
+          </span>
+
+          <div className="is-flex is-align-items-center card-footer-item">
+            <a download="FILENAME.png" href={image!} className=" is-primary ">
+              <FaFileDownload />
+            </a>
+          </div>
         </div>
       </div>
     </div>
