@@ -1,8 +1,8 @@
-import { Image, Link, Routes } from "blitz"
-import { Router } from "next/dist/client/router"
-import React from "react"
-import styles from "../styles/Post.module.scss"
+import { Image, Link, Routes, useMutation, useQuery } from "blitz"
+import React, { useEffect, useState } from "react"
 import { FaFileDownload, FaHeart } from "react-icons/fa"
+import likePost from "../mutations/likePost"
+import getNumberOfLikes from "../queries/getNumberOfLikes"
 
 interface PostData {
   tags: string | null
@@ -10,7 +10,13 @@ interface PostData {
   image: string | null
   authorName: string | null
   createdAt: Date | null
+  id: number
+}
+
+interface LikePostProps {
   id: number | string
+  like: boolean
+  userId: number
 }
 
 const defaultPostData: PostData = {
@@ -25,6 +31,22 @@ const defaultPostData: PostData = {
 
 function Post(props: { post: PostData }) {
   const { tags, image, authorName, createdAt, title, id }: PostData = props.post || defaultPostData
+  const [{ numberOfLikesQuery, didILikeIt }] = useQuery(getNumberOfLikes, { id: id })
+  const [numberOfLikes, setNumberOfLikes] = useState(numberOfLikesQuery || 0)
+  const [like, setLike] = useState(didILikeIt)
+
+  const [likePostMutation] = useMutation(likePost)
+
+  const handleLike = async (e) => {
+    e.preventDefault()
+    const post = await likePostMutation({
+      id: id,
+      like: like,
+    })
+    //setting updated number of likes
+    setNumberOfLikes(post._count.likedBy)
+    setLike(post.didILikeIt)
+  }
 
   return (
     <div className="py-5">
@@ -67,9 +89,9 @@ function Post(props: { post: PostData }) {
         </Link>
         <div className="card-footer is-flex ">
           <div className="is-flex is-align-items-center card-footer-item">
-            <a href={image!} className=" is-primary ">
-              <FaHeart />
-              <span className="mx-1">10</span>
+            <a href={image!} className=" is-primary " onClick={handleLike}>
+              <FaHeart className={like ? "has-text-primary" : "has-text-grey-light"} />
+              <span className="mx-1">{numberOfLikes}</span>
             </a>
           </div>
 

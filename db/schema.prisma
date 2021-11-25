@@ -6,6 +6,7 @@ datasource db {
   url                  = env("DATABASE_URL")
   shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
   referentialIntegrity = "prisma"
+
 }
 
 generator client {
@@ -24,9 +25,12 @@ model User {
   role           String   @default("USER")
   name           String
 
-  tokens   Token[]
-  sessions Session[]
-  posts    Post[]
+
+  tokens     Token[]
+  sessions   Session[]
+  posts      Post[]
+  likedPosts Post[]    @relation("like", fields: [postId], references: [id])
+  postId     Int?
 }
 
 model Session {
@@ -71,6 +75,9 @@ model Post {
   author     User?    @relation(fields: [authorId], references: [id])
   authorId   Int?
   authorName String
+  likedBy    User[]   @relation("like", fields: [authorId], references: [id])
+
+
 }
 
 // NOTE: It's highly recommended to use an enum for the token type

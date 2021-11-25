@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react"
 import KonvaBoard from "app/canvas/components/KonvaBoard"
-import styles from "../../canvas/styles/canvaspage.module.scss"
 import { Image, Link, Routes, useMutation, useRouter } from "blitz"
 import { FORM_ERROR } from "final-form"
 import createPost from "app/posts/mutations/createPost"
