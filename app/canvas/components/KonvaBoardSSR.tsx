@@ -138,6 +138,9 @@ const KonvaBoard = (props) => {
           onMouseDown={handleMouseDown}
           onMousemove={handleMouseMove}
           onMouseup={handleMouseUp}
+          onTouchEnd={handleMouseUp}
+          onTouchMove={handleMouseMove}
+          onTouchStart={handleMouseDown}
           className={styles.board}
           ref={stageRef}
         >

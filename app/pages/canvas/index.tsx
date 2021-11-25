@@ -1,13 +1,22 @@
-import React, { useRef, useState } from "react"
+import React, { Suspense, useRef, useState } from "react"
 import KonvaBoard from "app/canvas/components/KonvaBoard"
-import styles from "../../canvas/styles/canvaspage.module.scss"
-import { Image, Link, Routes, useMutation, useRouter } from "blitz"
+import {
+  ClientSession,
+  Image,
+  Link,
+  Routes,
+  useMutation,
+  useQuery,
+  useRouter,
+  useSession,
+} from "blitz"
 import { FORM_ERROR } from "final-form"
 import createPost from "app/posts/mutations/createPost"
 import Form from "app/core/components/Form"
 import LabeledTextField from "app/core/components/LabeledTextField"
 import Layout from "app/core/layouts/Layout"
 import { Title } from "app/auth/validations"
+import getCurrentUser from "app/users/queries/getCurrentUser"
 
 type PostValues = {
   tags: string
@@ -22,6 +31,8 @@ function CanvasPage(props) {
   const [exportedImage, setExportedImage] = useState<string>("")
   const publishButton = useRef(null)
   const saveButton = useRef(null)
+  const session: ClientSession = useSession()
+  console.log("🚀 ~ session", session)
 
   const handlePublish = async (values: PostValues) => {
     try {
@@ -70,10 +81,14 @@ function CanvasPage(props) {
                 ref={saveButton}
                 className="button is-primary is-fullwidth "
               >
-                Save
+                Download
               </a>
 
-              <button ref={publishButton} className="button is-primary  is-fullwidth ml-4">
+              <button
+                disabled={!session.userId}
+                ref={publishButton}
+                className="button is-primary  is-fullwidth ml-4 is-disabled "
+              >
                 Publish
               </button>
             </div>
@@ -84,6 +99,10 @@ function CanvasPage(props) {
   )
 }
 
-CanvasPage.getLayout = (page) => <Layout title="Canvas">{page}</Layout>
+CanvasPage.getLayout = (page) => (
+  <Suspense fallback={<div>Loading</div>}>
+    <Layout title="Canvas">{page}</Layout>
+  </Suspense>
+)
 
 export default CanvasPage
