@@ -1,4 +1,5 @@
 import { Image, Link, Routes, useMutation, useQuery } from "blitz"
+import moment from "moment"
 import React, { useEffect, useState } from "react"
 import { FaFileDownload, FaHeart } from "react-icons/fa"
 import likePost from "../mutations/likePost"
@@ -71,7 +72,7 @@ function Post(props: { post: PostData }) {
                   <a key={i}>#{tag}</a>
                 ))}
               </span>
-              <span>{createdAt?.toDateString()}</span>
+              <span className="has-text-grey-light is-size-7">{moment(createdAt).fromNow()}</span>
             </div>
           </div>
         </header>
