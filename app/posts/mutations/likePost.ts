@@ -1,7 +1,6 @@
 import { Ctx, resolver } from "blitz"
-import db, { prisma } from "db"
+import db from "db"
 import { z } from "zod"
-const { PrismaClient } = require("@prisma/client")
 
 const LikePost = z.object({
   id: z.number(),
@@ -34,8 +33,11 @@ export default resolver.pipe(
     })
 
     if (post.likedBy) {
-      return { ...post, didILikeIt: post.likedBy.some((user) => user.id === userId) ? true : false }
+      return {
+        countedNumberOfLikes: post._count.likedBy,
+        didILikeIt: post.likedBy.some((user) => user.id === userId) ? true : false,
+      }
     }
-    return { ...post, didILikeIt: false }
+    return { countedNumberOfLikes: post._count.likedBy, didILikeIt: false }
   }
 )

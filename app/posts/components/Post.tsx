@@ -14,12 +14,6 @@ interface PostData {
   id: number
 }
 
-interface LikePostProps {
-  id: number | string
-  like: boolean
-  userId: number
-}
-
 const defaultPostData: PostData = {
   tags: "palceholder tags",
   title: "placeholder title",
@@ -45,7 +39,7 @@ function Post(props: { post: PostData }) {
       like: like,
     })
     //setting updated number of likes
-    setNumberOfLikes(post._count.likedBy)
+    setNumberOfLikes(post.countedNumberOfLikes)
     setLike(post.didILikeIt)
   }
 
